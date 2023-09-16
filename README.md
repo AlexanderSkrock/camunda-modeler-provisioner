@@ -16,7 +16,7 @@ npm run dev
 ```
 As hint: Currently there is no test infrastructure, neither for the core logic nor for the CLI code. (I know, shame on me :( )
 
-In case you want to try the CLI interface manually, you can ran the following command followed by your subcommand and parameters you would like to test:
+In case you want to try the CLI interface manually, you can run the following command followed by your subcommand and parameters:
 ```sh
 npm run bin
 ```
