@@ -5,8 +5,10 @@
  * @returns {Promise} Always a fulfilled promise.
  * @private
  */
-module.exports = function printVersion (output) {
+function printHelp(output) {
     output.write('not yet available');
 
     return Promise.resolve(null);
 };
+
+module.exports = printHelp;
