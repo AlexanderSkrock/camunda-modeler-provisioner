@@ -10,10 +10,13 @@ Use [npm](https://www.npmjs.com/), the [Node.js](https://nodejs.org/en/) package
 npm install
 ```
 
+To automatically lint and test your changes run the following:
 ```sh
 npm run dev
 ```
+As hint: Currently there is no test infrastructure, neither for the core logic nor for the CLI code.
 
+In case you want to try the CLI interface manually, you can ran the following command followed by your subcommand and parameters you would like to test:
 ```sh
 npm run bin
 ```
