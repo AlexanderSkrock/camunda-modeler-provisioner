@@ -2,5 +2,5 @@
 require('./bootstrap')(
     require('./camunda-modeler'),
     require('./help'),
-    require('./version')
+    require('./version'),
 );

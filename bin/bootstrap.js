@@ -1,33 +1,33 @@
-function bootstrap(command, help, version) {
-    const argv = process.argv.slice(2)
+function bootstrap (command, help, version) {
+    const argv = process.argv.slice(2);
 
     switch (argv[0]) {
-        case undefined:
-        case "-h":
-        case "--help":
-            return help(process.stdout)
+    case undefined:
+    case '-h':
+    case '--help':
+        return help(process.stdout);
 
-        case "-v":
-        case "--version":
-            return version(process.stdout)
+    case '-v':
+    case '--version':
+        return version(process.stdout);
 
-        default:
-            // Main
-            return command(
-                argv,
-                process.stdout,
-                process.stderr
-            ).then(
-                () => {
-                    // I'm not sure why, but maybe the process never exits
-                    // on Git Bash (MINGW64)
-                    process.exit(0)
-                },
-                (err) => {
-                    console.error(err)
-                    process.exit(1)
-                }
-            )
+    default:
+        // Main
+        return command(
+            argv,
+            process.stdout,
+            process.stderr,
+        ).then(
+            () => {
+                // I'm not sure why, but maybe the process never exits
+                // on Git Bash (MINGW64)
+                process.exit(0);
+            },
+            (err) => {
+                console.error(err);
+                process.exit(1);
+            },
+        );
     }
 }
 

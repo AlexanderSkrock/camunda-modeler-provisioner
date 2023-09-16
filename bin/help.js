@@ -5,7 +5,7 @@
  * @returns {Promise} Always a fulfilled promise.
  * @private
  */
-function printHelp(output) {
+function printHelp (output) {
     output.write('not yet available');
 
     return Promise.resolve(null);

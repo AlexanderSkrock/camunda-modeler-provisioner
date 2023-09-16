@@ -7,8 +7,8 @@
     "camunda-modeler": "bin/index.js"
   },
   "scripts": {
+    "bin": "node bin/index.js",
     "lint": "esw bin lib",
-    "test": "run-s lint",
     "dev": "run-s \"lint -- -w\""
   },
   "repository": {
