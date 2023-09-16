@@ -4,8 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "bin": {
-    "install-camunda-modeler": "bin/install-camunda-modeler/index.js",
-    "configure-camunda-modeler": "bin/configure-camunda-modeler/index.js"
+    "camunda-modeler": "bin/index.js"
   },
   "scripts": {
     "lint": "esw bin lib",
