@@ -23,7 +23,8 @@ function bootstrap(command, help, version) {
                     // on Git Bash (MINGW64)
                     process.exit(0)
                 },
-                () => {
+                (err) => {
+                    console.error(err)
                     process.exit(1)
                 }
             )

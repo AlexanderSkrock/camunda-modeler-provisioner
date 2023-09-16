@@ -1,12 +1,13 @@
-const { install, getVersions } = require('../lib');
+const { install, getAllVersions } = require('../lib');
+const { getCurrentOS } = require('./process');
 
 module.exports = function (args, stdout, stderr) {
     switch(args[0]) {
         case 'versions':
-            return getVersions().then((versions) => stdout.write(`Versions:\n${versions.join("\n")}\n`))
+            return getAllVersions().then((versions) => stdout.write(`Versions:\n${versions.join("\n")}\n`))
         case 'install': {
-            return install(args[1]).then((res) => stdout.write(res + '\n'));
+            return install(getCurrentOS(), args[1]).then((res) => stdout.write(`Result: ${res}\n`));
         }
-        default: stderr.write(`Unknown parameters: ${args}\n`);
+        default: return Promise.reject(`Unknown parameters: ${args}`);
     }
 };
