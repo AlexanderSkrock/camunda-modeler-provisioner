@@ -1,5 +1,10 @@
-const { installCamundaModeler } = require('../lib');
+const { install } = require('../lib');
 
 module.exports = function (args, stdout, stderr) {
-    installCamundaModeler();
+    switch(args[0]) {
+        case 'install': {
+            return install(args[1]).then(() => stdout.write('Installation succeeded'));
+        }
+        default: stderr.write(`Unknown parameters: ${args}\n`);
+    }
 };
