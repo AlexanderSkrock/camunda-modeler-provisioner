@@ -10,7 +10,8 @@
     "lint": "esw bin lib",
     "lint-watch": "esw -w bin lib",
     "test": "mocha",
-    "test-watch": "mocha --watch"
+    "test-watch": "mocha --watch",
+    "prepublishOnly": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
