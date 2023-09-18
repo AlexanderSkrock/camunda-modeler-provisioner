@@ -29,8 +29,49 @@ To unlink again, simple type:
 npm unlink camunda-modeler-provisioner
 ```
 
+## Install
+
+You can install this package as usual:
+```sh
+npm i -s camunda-modeler-provisioner
+```
+or respectively
+```sh
+npm i -sD camunda-modeler-provisioner
+```
+if you need this as dev dependency only.
+
 ## Usage
-To be written (as binary as well trough code)
+
+This package distributes its functionality both as scripts as well js functions. The scripts are linked on running `npm install`, thus you can directly call `camunda-modeler-provisioner` from the CLI.
+
+To display a list of all released versions of the Camunda Modeler use the following:
+```sh
+camunda-modeler-provisioner versions
+```
+
+To download the latest release of the Camunda Modeler use `download`. Optionally you can also specify a version. This command will download to `$HOME/.cache/camunda-modeler` per default. Currently, this can not be changed, but it is planned to change. Also, if a version is already cached, nothing will be downloaded.
+```sh
+camunda-modeler-provisioner download
+```
+
+To install a version of the Camunda Modeler, you can use `install`. This will first download the specified version and then extract the zipped content to the specified directory. Per default this will be `$PWD/.camunda-modeler`. You might want to add this one to your `.gitignore` file.
+```sh
+camunda-modeler-provisioner install
+```
+Especially for developing a modeler extension it might be interesting that you can automatically link your extension on installation using the `--link-plugin` flag.
+```sh
+camunda-modeler install --link-plugin "path.to.plugin"
+```
+
+To launch the Camunda Modeler you need a ready Camunda Modeler installation first. Then you can run it with this command. Per default, the default installation directory will be checked, but a another path can be defined as parameter as well.
+```sh
+camunda-modeler-provisioner launch
+```
+
+If you need help or want additional information on usage or parameters you can always use `--help` to display help.
+
+If you would like to integrate any of the provided function you can also require these as mentioned earlier opening the ability to integrate the way you need it.
 
 ## Personal background
 

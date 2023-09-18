@@ -18,7 +18,7 @@ yargs(hideBin(process.argv))
     )
     .command(
         'download',
-        'Donwload Camunda Modler',
+        'Donwload Camunda Modeler',
         (yargs) => yargs
             .version(false)
             .option('version')
