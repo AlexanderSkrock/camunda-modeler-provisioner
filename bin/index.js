@@ -31,8 +31,9 @@ yargs(hideBin(process.argv))
         (yargs) => yargs
             .version(false)
             .option('version')
-            .option('path', { default: join(process.cwd(), '.camunda-modeler') }),
-        (args) => install(getCurrentOS(), args.version, args.path).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
+            .option('path', { default: join(process.cwd(), '.camunda-modeler') })
+            .option('link-plugin'),
+        (args) => install(getCurrentOS(), args.version, args.path, args['link-plugin']).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
     )
     .command(
         'launch',
