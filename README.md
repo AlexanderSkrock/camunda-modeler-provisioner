@@ -31,9 +31,9 @@ npm unlink camunda-modeler-provisioner
 
 ## Installation
 
-This package distributes its functionality both as scripts as well js functions. The scripts can directly be used via `npm exec` without explicitly adding the dependency:
+This package distributes its functionality both as scripts as well js functions. The scripts can directly be used via `npx` or `npm exec` without explicitly adding the dependency:
 ```sh
-npm exec -- camunda-modeler-provisioner
+npx camunda-modeler-provisioner
 ```
 Alternatively you can install this package as usual:
 ```sh
@@ -54,26 +54,26 @@ camunda-modeler-provisioner
 
 To display a list of all released versions of the Camunda Modeler use the following:
 ```sh
-npm exec -- camunda-modeler-provisioner versions
+npx camunda-modeler-provisioner versions
 ```
 
 To download the latest release of the Camunda Modeler use `download`. Optionally you can also specify a version. This command will download to `$HOME/.cache/camunda-modeler` per default. Currently, this can not be changed, but it is planned to change. Also, if a version is already cached, nothing will be downloaded.
 ```sh
-npm exec -- camunda-modeler-provisioner download
+npx camunda-modeler-provisioner download
 ```
 
 To install a version of the Camunda Modeler, you can use `install`. This will first download the specified version and then extract the zipped content to the specified directory. Per default this will be `$PWD/.camunda-modeler`. You might want to add this one to your `.gitignore` file.
 ```sh
-npm exec -- camunda-modeler-provisioner install
+npx camunda-modeler-provisioner install
 ```
 Especially for developing a modeler extension it might be interesting that you can automatically link your extension on installation using the `--link-plugin` flag.
 ```sh
-npm exec -- camunda-modeler install --link-plugin "path.to.plugin"
+npx camunda-modeler install --link-plugin "path.to.plugin"
 ```
 
 To launch the Camunda Modeler you need a ready Camunda Modeler installation first. Then you can run it with this command. Per default, the default installation directory will be checked, but a another path can be defined as parameter as well.
 ```sh
-npm exec -- camunda-modeler-provisioner launch
+npx camunda-modeler-provisioner launch
 ```
 
 If you need help or want additional information on usage or parameters you can always use `--help` to display help.
