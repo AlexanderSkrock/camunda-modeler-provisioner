@@ -26,7 +26,8 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "unzipper": "^0.10.14"
   },
   "devDependencies": {
     "eslint": "^8.49.0",

@@ -1,2 +1,5 @@
 # Dependencies
 node_modules/
+
+# Camunda Modeler
+.camunda-modeler/
