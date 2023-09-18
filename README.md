@@ -14,11 +14,10 @@ To lint as you code, you can run the following:
 ```sh
 npm run lint-watch
 ```
-The same goes for testing as follows:
+The same goes for testing:
 ```sh
 npm run test-watch
 ```
-Currently there is no test infrastructure, neither for the core logic nor for the CLI code. (I know, shame on me :( )
 
 In case you want to try the CLI interface, you can run the following command to link the script:
 ```sh
