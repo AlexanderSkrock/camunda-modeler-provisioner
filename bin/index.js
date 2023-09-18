@@ -23,7 +23,7 @@ yargs(hideBin(process.argv))
             .version(false)
             .option('version')
             .option('path', { default: join(process.cwd(), '.camunda-modeler') }),
-        (args) => download(getCurrentOS(), args.version, args.path).then((res) => process.stdout.write(`Download was finished successful: ${res}`)),
+        (args) => download(getCurrentOS(), args.version, args.path).then((res) => process.stdout.write(`Download was finished successfully: ${res}`)),
     )
     .command(
         'install',
@@ -32,12 +32,12 @@ yargs(hideBin(process.argv))
             .version(false)
             .option('version')
             .option('path', { default: join(process.cwd(), '.camunda-modeler') }),
-        (args) => install(getCurrentOS(), args.version, args.path).then((res) => process.stdout.write(`Installation was finished successful: ${res}\n`)),
+        (args) => install(getCurrentOS(), args.version, args.path).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
     )
     .command(
         'launch',
         'Launch Camunda Modeler',
         (yargs) => yargs.option('path', { default: join(process.cwd(), '.camunda-modeler') }),
-        args => launch(getCurrentOS(), args.path).then(res => process.stdout.write(`Started Camunda Modeler successfully ${res}\n`)).catch(err => `An error occurred: ${err}`),
+        args => launch(getCurrentOS(), args.path).catch(err => `An error occurred: ${err}`),
     )
     .argv;
