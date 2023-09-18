@@ -1,4 +1,4 @@
-![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/node.js.yml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Static Badge](https://img.shields.io/badge/OS-Windows-green)](https://img.shields.io/badge/OS-Windows-green) ![Static Badge](https://img.shields.io/badge/OS-Linux-gray) ![Static Badge](https://img.shields.io/badge/OS-Mac-red) [![node](https://img.shields.io/node/v/passport.svg)](https://github.com/alexanderskrock/camunda-modeler-provisioner) ![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/node.js.yml/badge.svg)
 # camunda-modeler-provisioner
 > Setup a Camunda Modeler in any version preconfigured for your needs in no-time!
 
