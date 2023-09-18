@@ -7,9 +7,8 @@
     "camunda-modeler": "bin/index.js"
   },
   "scripts": {
-    "bin": "node bin/index.js",
     "lint": "esw bin lib",
-    "dev": "run-s \"lint -- -w\""
+    "lint-watch": "esw -w bin lib"
   },
   "repository": {
     "type": "git",

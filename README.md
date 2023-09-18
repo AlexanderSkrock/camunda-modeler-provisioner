@@ -10,15 +10,23 @@ Use [npm](https://www.npmjs.com/), the [Node.js](https://nodejs.org/en/) package
 npm install
 ```
 
-To automatically lint and test your changes run the following:
+To lint as you code, you can run the following:
 ```sh
-npm run dev
+npm run lint-watch
 ```
-As hint: Currently there is no test infrastructure, neither for the core logic nor for the CLI code. (I know, shame on me :( )
-
-In case you want to try the CLI interface manually, you can run the following command followed by your subcommand and parameters:
+The same goes for testing as follows:
 ```sh
-npm run bin
+npm run test-watch
+```
+Currently there is no test infrastructure, neither for the core logic nor for the CLI code. (I know, shame on me :( )
+
+In case you want to try the CLI interface, you can run the following command to link the script:
+```sh
+npm link
+```
+To unlink again, simple type:
+```sh
+npm unlink camunda-modeler-provisioner
 ```
 
 ## Usage
