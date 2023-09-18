@@ -1,3 +1,4 @@
+![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/node.js.yml/badge.svg)
 # camunda-modeler-provisioner
 > Setup a Camunda Modeler in any version preconfigured for your needs in no-time!
 
