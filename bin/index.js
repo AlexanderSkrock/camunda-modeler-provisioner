@@ -4,8 +4,7 @@ const { hideBin } = require('yargs/helpers');
 
 const { join } = require('node:path');
 
-const { getCurrentOS } = require('./process');
-const { getAllVersions, download, install, launch } = require('../lib');
+const { getAllVersions, download, install, launch, Platform } = require('../lib');
 
 // eslint-disable-next-line
 yargs(hideBin(process.argv))
@@ -23,7 +22,7 @@ yargs(hideBin(process.argv))
             .version(false)
             .option('version')
             .option('path', { default: join(process.cwd(), '.camunda-modeler') }),
-        (args) => download(getCurrentOS(), args.version, args.path).then((res) => process.stdout.write(`Download was finished successfully: ${res}`)),
+        (args) => download(Platform.currentPlatform(), args.version, args.path).then((res) => process.stdout.write(`Download was finished successfully: ${res}`)),
     )
     .command(
         'install',
@@ -33,12 +32,12 @@ yargs(hideBin(process.argv))
             .option('version')
             .option('path', { default: join(process.cwd(), '.camunda-modeler') })
             .option('link-plugin'),
-        (args) => install(getCurrentOS(), args.version, args.path, args['link-plugin']).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
+        (args) => install(Platform.currentPlatform(), args.version, args.path, args['link-plugin']).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
     )
     .command(
         'launch',
         'Launch Camunda Modeler',
         (yargs) => yargs.option('path', { default: join(process.cwd(), '.camunda-modeler') }),
-        args => launch(getCurrentOS(), args.path).catch(err => `An error occurred: ${err}`),
+        args => launch(Platform.currentPlatform(), args.path).catch(err => `An error occurred: ${err}`),
     )
     .argv;
