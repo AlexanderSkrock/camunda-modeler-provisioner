@@ -28,6 +28,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "cosmiconfig": "^8.3.6",
     "node-stream-zip": "^1.15.0",
     "yargs": "^17.7.2"
   },
