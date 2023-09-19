@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Static Badge](https://img.shields.io/badge/OS-Windows-green)](https://img.shields.io/badge/OS-Windows-green) ![Static Badge](https://img.shields.io/badge/OS-Linux-gray) ![Static Badge](https://img.shields.io/badge/OS-Mac-red) [![node](https://img.shields.io/node/v/passport.svg)](https://github.com/alexanderskrock/camunda-modeler-provisioner) ![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/node.js.yml/badge.svg)
 # camunda-modeler-provisioner
-> Setup a Camunda Modeler in any version preconfigured for your needs in no-time!
+> Set up a Camunda Modeler in any version preconfigured for your needs in no-time!
 
 My vision is to provide an automated way of installation and configuration trough IDE or CLI to help in a multitude of use cases. No matter if you try to reproduce a bug, test your changes to a modeler extension, test your changes to element templates or modify bpmn files in your current project this tool should be your choice! 
 
@@ -71,7 +71,7 @@ Especially for developing a modeler extension it might be interesting that you c
 npx camunda-modeler install --link-plugin "path.to.plugin"
 ```
 
-To launch the Camunda Modeler you need a ready Camunda Modeler installation first. Then you can run it with this command. Per default, the default installation directory will be checked, but a another path can be defined as parameter as well.
+To launch the Camunda Modeler you need a ready Camunda Modeler installation first. Then you can run it with this command. Per default, the default installation directory will be checked, but another path can be defined as parameter as well.
 ```sh
 npx camunda-modeler-provisioner launch
 ```
