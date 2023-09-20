@@ -1,6 +1,6 @@
 const assert = require('node:assert');
 const { isAbsolute } = require('node:path');
-const { describe, it } = require('mocha');
+const { describe, it } = require('node:test');
 
 const { getConfig, overrideConfig, Config } = require('../../lib/config');
 const { currentPlatform, Platform } = require('../../lib/platform');

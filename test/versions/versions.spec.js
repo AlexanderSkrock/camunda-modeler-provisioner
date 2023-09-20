@@ -1,6 +1,6 @@
 const assert = require('node:assert');
-const { mock } = require('node:test');
-const { after, before, describe, it } = require('mocha');
+const { after, before, describe, it, mock } = require('node:test');
+
 const { getAllVersions } = require('../../lib/versions');
 
 describe('Versions', function () {
@@ -9,11 +9,7 @@ describe('Versions', function () {
             mock.method(global, 'fetch', () => Promise.resolve({
                 status: 200,
                 headers: { 'Content-type': 'application/json' },
-                json: () => {
-                    const js = require('./versions_response.json');
-                    console.log(js);
-                    return js;
-                },
+                json: () => require('./versions_response.json'),
             }),
             );
         });
