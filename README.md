@@ -80,6 +80,32 @@ If you need help or want additional information on usage or parameters you can a
 
 If you would like to integrate any of the provided function you can also require these as mentioned earlier opening the ability to integrate the way you need it.
 
+## Configuration
+
+While passing parameters both via CLI or JS API is possible, you can also define the configuration within files in case that better suits your needs.
+
+* .puppeteerrc.cjs
+* .puppeteerrc.js
+* .puppeteerrc (YAML/JSON)
+* .puppeteerrc.json
+* .puppeteerrc.yaml
+* puppeteer.config.js
+* puppeteer.config.cjs
+
+The Camunda Modeler provisioner will also read a `camunda-modeler` key from your application's package.json
+
+An example configuration in a json format could be as follows:
+
+```json
+{
+  "version": "v5.15.0",
+  "installationPath": "./camunda-modeler",
+  "linkedPlugins": ["."]
+}
+```
+
+This configuration would install a Camunda Modeler with version `v5.15.0` in a subfolder of your current directory called `.camunda-modeler`. Additionally, the current directory will be linked as plugin into this Camunda Modeler instance. This could be the case, when you develop an extension.
+
 ## Personal background
 
 I rarely have coherent time slots longer than 10 minutes, so expect many very small commits. Also, I wanted to try out the feature that npm packages can provide binaries and related topics. Thus, especially in the beginning of this project ahead of the first release, there will be a lot back and forth trying to figure out best practises as well as pro and cons for my use case.
