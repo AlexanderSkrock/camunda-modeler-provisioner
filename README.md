@@ -84,13 +84,13 @@ If you would like to integrate any of the provided function you can also require
 
 While passing parameters both via CLI or JS API is possible, you can also define the configuration within files in case that better suits your needs.
 
-* .puppeteerrc.cjs
-* .puppeteerrc.js
-* .puppeteerrc (YAML/JSON)
-* .puppeteerrc.json
-* .puppeteerrc.yaml
-* puppeteer.config.js
-* puppeteer.config.cjs
+* .camunda-modeler.cjs
+* .camunda-modeler.js
+* .camunda-modeler (YAML/JSON)
+* .camunda-modeler.json
+* .camunda-modeler.yaml
+* camunda-modeler.config.js
+* camunda-modeler.config.cjs
 
 The Camunda Modeler provisioner will also read a `camunda-modeler` key from your application's package.json
 
