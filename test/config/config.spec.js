@@ -51,6 +51,10 @@ describe('Config', function () {
             const config = new Config().withOverrides({ installationPath: '.' });
             assert.ok(isAbsolute(config.getInstallationPath()));
         });
+        it('getCachePath always returns an absolute path', function () {
+            const config = new Config().withOverrides({ cachePath: '.' });
+            assert.ok(isAbsolute(config.getCachePath()));
+        });
         it('getLinkedPlugins returns an empty array if not set', function () {
             const config = new Config();
             assert.deepEqual(config.getLinkedPlugins(), []);

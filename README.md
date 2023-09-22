@@ -94,6 +94,16 @@ While passing parameters both via CLI or JS API is possible, you can also define
 
 The Camunda Modeler provisioner will also read a `camunda-modeler` key from your application's package.json
 
+The following parameters are available:
+
+| CLI parameter        | Config file parameter | Default                      | Description                                                                                                                                |
+|----------------------|-----------------------|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| <i>not available</i> | platform              | Process platform             | Platform of the Camunda Modeler<br/>This option determines what artifact and binary file to use                                            |
+| version              | version               | Latest                       | Version the Camunda Mdoeler                                                                                                                |
+| cache-path           | cachePath             | $HOME/.cache/camunda-modeler | In this directory all downloaded artifacts will be cached. Will be created if it does not exists.                                          |
+| path                 | installationPath      | $PWD/camunda-modeler         | This path will be used to install the Camunda Modeler. Also this directoy will be queried when attempting to launch an installed instance. |
+| link-plugin          | linkedPlugins         | None                         | This option enables to link a plugin or extension dynamically to the installed Camunda Modeler instance.                                   |
+
 An example configuration in a json format could be as follows:
 
 ```json
