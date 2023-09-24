@@ -11,6 +11,7 @@
     "lint-watch": "esw -w bin lib",
     "test": "node --test test",
     "test-watch": "node --test --watch test",
+    "test-resources": "node scripts/generate-test-resources.js",
     "prepublishOnly": "npm run lint && npm test"
   },
   "repository": {
