@@ -30,13 +30,16 @@ Promise.all([
             }))
         ]);
     }),
-    fetch(latestReleaseUrl).then(response => response.json()).then(json => {
+    fetch(latestReleaseUrl).then(response => response.json()).then(latestRelease => {
         const fileName = crypto.webcrypto.randomUUID() + '.json';
         responseMapping[latestReleaseUrl] = fileName;
-        return writeFile(join(testResourcesPath, fileName), JSON.stringify(json));
+        return Promise.all([
+            writeFile(join(testResourcesPath, fileName), JSON.stringify(latestRelease)),
+            ...latestRelease.assets.map(asset => fetch(asset.browser_download_url).then(response => {
+                const fileName = crypto.webcrypto.randomUUID();
+                responseMapping[asset.browser_download_url] = fileName;
+                return writeFile(join(testResourcesPath, fileName), response.body);
+            }))
+        ]);
     })
 ]).then(() => writeFile(join(testResourcesPath, "response_mappings.json"), JSON.stringify(responseMapping)));
-
-// release.assets[x].browser_download_url
-
-// Assets
