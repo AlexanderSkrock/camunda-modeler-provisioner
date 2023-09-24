@@ -1,4 +1,5 @@
-const { accessSync, constants, rm, mkdirSync, writeFileSync } = require('node:fs');
+const crypto = require('node:crypto');
+const { accessSync, constants, mkdirSync } = require('node:fs');
 const { writeFile } = require('node:fs/promises');
 const { join } = require('node:path');
 
@@ -16,9 +17,9 @@ const releasesUrl = 'https://api.github.com/repos/camunda/camunda-modeler/releas
 
 Promise.all([
     fetch(releasesUrl).then(response => response.json()).then(json => {
-        const filePath = join(testResourcesPath, 'random' + '.json');
-        responseMapping[releasesUrl] = filePath;
-        return writeFile(filePath, JSON.stringify(json));
+        const fileName = crypto.webcrypto.randomUUID() + '.json';
+        responseMapping[releasesUrl] = fileName;
+        return writeFile(join(testResourcesPath, fileName), JSON.stringify(json));
     })
 ]).then(() => writeFile(join(testResourcesPath, "response_mappings.json"), JSON.stringify(responseMapping)));
 // const latestReleaseUrl = `${releasesUrl}/latest`;
