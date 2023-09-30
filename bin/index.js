@@ -20,9 +20,13 @@ yargs(hideBin(process.argv))
         (yargs) => yargs
             .version(false)
             .option('version', { default: getConfig().getVersion() })
-            .option('version', { default: getConfig().getVersion() })
+            .option('cache', { boolean: true, default: !getConfig().shouldSkipCache() })
             .option('cache-path', { default: getConfig().getCachePath() }),
-        (args) => download(process.platform, args.version, args.path).then((res) => process.stdout.write(`Download was finished successfully: ${res}`)),
+        (args) => download({
+            version: args.version,
+            noCache: !args.cache,
+            cachePath: args['cache-path'],
+        }).then((res) => process.stdout.write(`Download was finished successfully: ${res}`)),
     )
     .command(
         'install',
@@ -32,14 +36,24 @@ yargs(hideBin(process.argv))
             .option('version', { default: getConfig().getVersion() })
             .option('path', { default: getConfig().getInstallationPath() })
             .option('overwrite', { boolean: true, default: getConfig().shouldOverwriteExistingInstallation() })
+            .option('cache', { boolean: true, default: !getConfig().shouldSkipCache() })
             .option('cache-path', { default: getConfig().getCachePath() })
             .option('link-plugin'),
-        (args) => install(process.platform, args.version, args.path, args.overwrite, args['cache-path'], args['link-plugin'] && [args['link-plugin']]).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
+        (args) => install({
+            version: args.version,
+            noCache: !args.cache,
+            cachePath: args['cache-path'],
+            installationPath: args.path,
+            overwriteExistingInstallation: args.overwrite,
+            linkedPlugins: [args['link-plugin']],
+        }).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
     )
     .command(
         'launch',
         'Launch Camunda Modeler',
         (yargs) => yargs.option('path', { default: getConfig().getInstallationPath() }),
-        args => launch(process.platform, args.path).catch(err => `An error occurred: ${err}`),
+        args => launch({
+            installationPath: args.path,
+        }).catch(err => `An error occurred: ${err}`),
     )
     .argv;
