@@ -4,7 +4,6 @@ const { hideBin } = require('yargs/helpers');
 
 const { getAllVersions, download, install, launch } = require('../lib');
 const { getConfig } = require('../lib');
-const { version } = require('yargs');
 
 // eslint-disable-next-line
 yargs(hideBin(process.argv))
@@ -46,7 +45,7 @@ yargs(hideBin(process.argv))
             cachePath: args['cache-path'],
             installationPath: args.path,
             overwriteExistingInstallation: args.overwrite,
-            linkedPlugins: [ args['link-plugin'] ],
+            linkedPlugins: [args['link-plugin']],
         }).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
     )
     .command(
