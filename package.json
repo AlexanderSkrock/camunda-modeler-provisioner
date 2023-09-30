@@ -9,9 +9,10 @@
   "scripts": {
     "lint": "esw bin lib",
     "lint-watch": "esw -w bin lib",
+    "postinstall": "node scripts/postinstall.js",
+    "prepublishOnly": "npm run lint && npm test",
     "test": "node --test test",
-    "test-watch": "node --test --watch test",
-    "prepublishOnly": "npm run lint && npm test"
+    "test-watch": "node --test --watch test"
   },
   "repository": {
     "type": "git",
