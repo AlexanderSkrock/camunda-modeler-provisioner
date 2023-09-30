@@ -31,9 +31,10 @@ yargs(hideBin(process.argv))
             .version(false)
             .option('version', { default: getConfig().getVersion() })
             .option('path', { default: getConfig().getInstallationPath() })
+            .option('overwrite', { boolean: true, default: getConfig().shouldOverwriteExistingInstallation() })
             .option('cache-path', { default: getConfig().getCachePath() })
             .option('link-plugin'),
-        (args) => install(process.platform, args.version, args.path, args['cache-path'], args['link-plugin'] && [args['link-plugin']]).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
+        (args) => install(process.platform, args.version, args.path, args.overwrite, args['cache-path'], args['link-plugin'] && [args['link-plugin']]).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
     )
     .command(
         'launch',
