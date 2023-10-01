@@ -1,9 +1,9 @@
-const crypto = require('node:crypto');
+const { webcrypto } = require('node:crypto');
 const { accessSync, constants, mkdirSync } = require('node:fs');
 const { writeFile } = require('node:fs/promises');
-const { extname, join } = require('node:path');
+const { basename, join, relative, resolve } = require('node:path');
 
-const testResourcesPath = join(process.cwd(), 'test-resources');
+const testResourcesPath = resolve('test-resources');
 
 try {
     accessSync(testResourcesPath, constants.W_OK | constants.R_OK)
@@ -35,14 +35,15 @@ Promise.all([
 ]).then(() => {
     const responseJson = {}
     return Promise.all(Object.entries(responseMapping).map(([url, response]) => {
-        const dataPath = join(testResourcesPath, crypto.webcrypto.randomUUID());
+        const fileName = `${webcrypto.randomUUID()}_${basename(new URL(url).pathname)}`;
+        const dataPath = join(testResourcesPath,  fileName);
 
         responseJson[url] = {
             ok: response.ok,
             status: response.status,
             statusText: response.statusText,
             headers: [...response.headers.entries()].reduce((result, [k, v]) => ({ ...result, [k]: v }), {}),
-            dataPath,
+            dataPath: relative(testResourcesPath, dataPath),
         };
 
         return writeFile(dataPath, response.body);
