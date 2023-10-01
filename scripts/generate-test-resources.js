@@ -43,7 +43,7 @@ Promise.all([
             status: response.status,
             statusText: response.statusText,
             headers: [...response.headers.entries()].reduce((result, [k, v]) => ({ ...result, [k]: v }), {}),
-            dataPath: relative(testResourcesPath, dataPath),
+            body: relative(testResourcesPath, dataPath),
         };
 
         return writeFile(dataPath, response.body);
