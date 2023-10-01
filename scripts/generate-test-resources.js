@@ -1,7 +1,7 @@
 const crypto = require('node:crypto');
 const { accessSync, constants, mkdirSync } = require('node:fs');
 const { writeFile } = require('node:fs/promises');
-const { join } = require('node:path');
+const { extname, join } = require('node:path');
 
 const testResourcesPath = join(process.cwd(), 'test-resources');
 
@@ -12,34 +12,39 @@ try {
 }
 
 const responseMapping = {};
+function fetchAndRemember(resource, options) {
+    return fetch(resource, options).then(response => {
+        responseMapping[resource] = response;
+        return response;
+    })
+}
 
 const releasesUrl = 'https://api.github.com/repos/camunda/camunda-modeler/releases';
 const latestReleaseUrl = `${releasesUrl}/latest`;
 const taggedReleaseUrl = tag => `${releasesUrl}/tags/${tag}`;
 
 Promise.all([
+    fetchAndRemember(releasesUrl),
     fetch(releasesUrl).then(response => response.json()).then(releases => {
-        const fileName = crypto.webcrypto.randomUUID() + '.json';
-        responseMapping[releasesUrl] = fileName;
-        return Promise.all([
-            writeFile(join(testResourcesPath, fileName), JSON.stringify(releases)),
-            ...releases.map(r => fetch(taggedReleaseUrl(r.name)).then(response => response.json()).then(release => {
-                const fileName = crypto.webcrypto.randomUUID() + '.json';
-                responseMapping[taggedReleaseUrl(r.name)] = fileName;
-                return writeFile(join(testResourcesPath, fileName), JSON.stringify(release));
-            }))
-        ]);
+        return Promise.all(releases.map(r => fetchAndRemember(taggedReleaseUrl(r.name))));
     }),
+    fetchAndRemember(latestReleaseUrl),
     fetch(latestReleaseUrl).then(response => response.json()).then(latestRelease => {
-        const fileName = crypto.webcrypto.randomUUID() + '.json';
-        responseMapping[latestReleaseUrl] = fileName;
-        return Promise.all([
-            writeFile(join(testResourcesPath, fileName), JSON.stringify(latestRelease)),
-            ...latestRelease.assets.map(asset => fetch(asset.browser_download_url).then(response => {
-                const fileName = crypto.webcrypto.randomUUID();
-                responseMapping[asset.browser_download_url] = fileName;
-                return writeFile(join(testResourcesPath, fileName), response.body);
-            }))
-        ]);
+        return Promise.all(latestRelease.assets.map(asset => fetchAndRemember(asset.browser_download_url)));
     })
-]).then(() => writeFile(join(testResourcesPath, "response_mappings.json"), JSON.stringify(responseMapping)));
+]).then(() => {
+    const responseJson = {}
+    return Promise.all(Object.entries(responseMapping).map(([url, response]) => {
+        const dataPath = join(testResourcesPath, crypto.webcrypto.randomUUID());
+
+        responseJson[url] = {
+            ok: response.ok,
+            status: response.status,
+            statusText: response.statusText,
+            headers: [...response.headers.entries()].reduce((result, [k, v]) => ({ ...result, [k]: v }), {}),
+            dataPath,
+        };
+
+        return writeFile(dataPath, response.body);
+    })).then(() => writeFile(join(testResourcesPath, "response_mappings.json"), JSON.stringify(responseJson)));
+});
