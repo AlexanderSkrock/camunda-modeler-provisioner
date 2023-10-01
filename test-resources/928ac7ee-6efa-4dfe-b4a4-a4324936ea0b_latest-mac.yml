@@ -1,0 +1,8 @@
+version: 5.15.1
+files:
+  - url: camunda-modeler-5.15.1-mac.dmg
+    sha512: eiwm9ckb1xION0xBLzVsxQG9T/UwNixtfcVfvdM7TtQApYYagj3b2JSYzRH0MNDuvGLx9OSoV2jrfDM+5wx2Mw==
+    size: 105097025
+path: camunda-modeler-5.15.1-mac.dmg
+sha512: eiwm9ckb1xION0xBLzVsxQG9T/UwNixtfcVfvdM7TtQApYYagj3b2JSYzRH0MNDuvGLx9OSoV2jrfDM+5wx2Mw==
+releaseDate: '2023-09-21T08:20:39.900Z'
