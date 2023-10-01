@@ -1,21 +1,15 @@
 const assert = require('node:assert');
-const { after, before, describe, it, mock } = require('node:test');
+const { describe, it, mock } = require('node:test');
 
 const { getAllVersions } = require('../../lib/versions');
+const withNetworkMocks = require('../util/withNetworkMocks');
 
-describe('Versions', function () {
+describe('Versions', withNetworkMocks(function () {
     describe('#getAllVersions', function () {
-        before(() => {
-            mock.method(global, 'fetch', () => Promise.resolve({
-                status: 200,
-                headers: { 'Content-type': 'application/json' },
-                json: () => require('./versions_response.json'),
-            }),
-            );
-        });
         it('should return array of version tags', async function () {
             const versions = await getAllVersions();
             assert.deepEqual(versions, [
+                'v5.15.1',
                 'v5.15.0',
                 'v5.14.0',
                 'v5.13.0',
@@ -45,9 +39,7 @@ describe('Versions', function () {
                 'v4.11.0',
                 'v4.11.0-rc.1',
                 'v4.11.0-rc.0',
-                'v4.10.0',
             ]);
         });
-        after(() => mock.reset());
     });
-});
+}));
