@@ -8,16 +8,17 @@ function mockNetworkCalls(testContext) {
 
     const testResourcesPath = resolve(__dirname, '..', '..', 'test-resources');
     const responseMappings = require(join(testResourcesPath, 'response_mappings.json'));
-    mockObject.method(global, 'fetch', (resource) => {
+    const proxy = mockObject.method(global, 'fetch', (resource) => {
         const mapping = responseMappings[resource];
         if (!mapping) {
             return Promise.resolve(new Response(undefined, {
-                status: 200,
+                status: 404,
                 statusText: "Not Found",
             }));
         }
         return readFile(join(testResourcesPath, mapping.body)).then(body => new Response(body, mapping));
     });
+    return proxy.mock;
 }
 
 module.exports = mockNetworkCalls;

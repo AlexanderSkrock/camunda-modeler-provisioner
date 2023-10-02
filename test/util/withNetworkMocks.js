@@ -7,12 +7,16 @@ function withNetworkMocks(testFunction) {
         const contextAfterEach = testContext && testContext.afterEach ? testContext.afterEach : afterEach;
         const contextMock = testContext && testContext.mock ? testContext.mock : mock;
             
+        let fetchMock;
         contextBeforeEach(() => {
-            mockNetworkCalls(testContext);
+            fetchMock = mockNetworkCalls(testContext);
         });
-        testFunction(testContext);
+        // We inject the fetchMock as function,
+        // because the variable will be set later.
+        testFunction(() => fetchMock, testContext);
         contextAfterEach(() => {
             contextMock.reset();
+            fetchMock = undefined;
         })
     }
 }

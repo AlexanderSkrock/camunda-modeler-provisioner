@@ -1,7 +1,7 @@
 const assert = require('node:assert');
-const { describe, it, mock } = require('node:test');
+const { describe, it } = require('node:test');
 
-const { getAllVersions } = require('../../lib/versions');
+const { getAllVersions } = require('../../lib');
 const withNetworkMocks = require('../util/withNetworkMocks');
 
 describe('Versions', withNetworkMocks(function () {
