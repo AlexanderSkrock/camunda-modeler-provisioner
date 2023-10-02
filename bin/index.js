@@ -2,8 +2,8 @@
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
-const { getAllVersions, download, install, launch } = require('../lib');
-const { getConfig } = require('../lib');
+const { getAllVersions, download, getConfig, install, launch } = require('../lib');
+const { error, info } = require('../lib/logging');
 
 // eslint-disable-next-line
 yargs(hideBin(process.argv))
@@ -12,7 +12,9 @@ yargs(hideBin(process.argv))
         'versions',
         'List available versions of the Camunda Modeler',
         () => {},
-        () => getAllVersions().then((versions) => process.stdout.write(`Versions:\n${versions.join('\n')}\n`)),
+        () => getAllVersions()
+            .then((versions) => info(versions.join('\n')))
+            .catch(err => error(err)),
     )
     .command(
         'download',
@@ -26,7 +28,8 @@ yargs(hideBin(process.argv))
             version: args.version,
             noCache: !args.cache,
             cachePath: args['cache-path'],
-        }).then((res) => process.stdout.write(`Download was finished successfully: ${res}`)),
+        }).then((res) => info(`Download was finished successfully: ${res}`))
+          .catch(err => error(err)),
     )
     .command(
         'install',
@@ -46,7 +49,8 @@ yargs(hideBin(process.argv))
             installationPath: args.path,
             overwriteExistingInstallation: args.overwrite,
             linkedPlugins: [args['link-plugin']],
-        }).then((res) => process.stdout.write(`Installation was finished successfully: ${res}\n`)),
+        }).then((res) => info(`Installation was finished successfully: ${res}`))
+          .catch(err => error(err)),
     )
     .command(
         'launch',
@@ -54,6 +58,7 @@ yargs(hideBin(process.argv))
         (yargs) => yargs.option('path', { default: getConfig().getInstallationPath() }),
         args => launch({
             installationPath: args.path,
-        }).catch(err => `An error occurred: ${err}`),
+        }).then(() => info("Camunda Modeler launched successfully"))
+          .catch(err => error(err)),
     )
     .argv;
