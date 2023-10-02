@@ -1,4 +1,5 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Static Badge](https://img.shields.io/badge/OS-Windows-green)](https://img.shields.io/badge/OS-Windows-green) ![Static Badge](https://img.shields.io/badge/OS-Linux-gray) ![Static Badge](https://img.shields.io/badge/OS-Mac-gray) [![node](https://img.shields.io/node/v/passport.svg)](https://github.com/alexanderskrock/camunda-modeler-provisioner) ![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/node.js.yml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![node](https://img.shields.io/node/v/passport.svg)](https://github.com/alexanderskrock/camunda-modeler-provisioner) ![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/windows-ci.yml/badge.svg) ![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/linux-ci.yml/badge.svg) ![Build](https://github.com/alexanderskrock/camunda-modeler-provisioner/actions/workflows/mac-ci.yml/badge.svg)
+
 # camunda-modeler-provisioner
 > Set up a Camunda Modeler in any version preconfigured for your needs in no-time!
 
