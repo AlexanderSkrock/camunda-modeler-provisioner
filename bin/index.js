@@ -41,14 +41,16 @@ yargs(hideBin(process.argv))
             .option('overwrite', { boolean: true, default: getConfig().shouldOverwriteExistingInstallation() })
             .option('cache', { boolean: true, default: !getConfig().shouldSkipCache() })
             .option('cache-path', { default: getConfig().getCachePath() })
-            .option('link-plugin'),
+            .option('link-plugin')
+            .option('link-template'),
         (args) => install({
             version: args.version,
             noCache: !args.cache,
             cachePath: args['cache-path'],
             installationPath: args.path,
             overwriteExistingInstallation: args.overwrite,
-            linkedPlugins: [args['link-plugin']],
+            linkedPlugins: args['link-plugin'] && [args['link-plugin']],
+            linkedTemplates: args['link-template'] && [args['link-template']],
         }).then((res) => info(`Installation was finished successfully: ${res}`))
             .catch(err => error(err)),
     )

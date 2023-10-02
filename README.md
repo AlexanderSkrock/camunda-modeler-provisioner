@@ -106,6 +106,7 @@ The following parameters are available:
 | path                 | installationPath              | $PWD/camunda-modeler         | This path will be used to install the Camunda Modeler. Also this directoy will be queried when attempting to launch an installed instance.                                                                                                                            |
 | overwrite            | overwriteExistingInstallation | false                        | Before starting the installation the target directory will be checked wether it is empty. If it is empty, everything is fine. Otherwise, the behaviour dependes on this flag. Per default the process will abort, but it can be enabled to clear the directory first. |
 | link-plugin          | linkedPlugins                 | None                         | This option enables to link a plugin or extension dynamically to the installed Camunda Modeler instance.                                                                                                                                                              |
+| link-template        | linkedTemplates               | None                         | This option enables to link an element template dynamically to the installed Camunda Modeler.                                                         |
 
 An example configuration in a json format could be as follows:
 
