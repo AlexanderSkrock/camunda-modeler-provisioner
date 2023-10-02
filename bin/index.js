@@ -29,7 +29,7 @@ yargs(hideBin(process.argv))
             noCache: !args.cache,
             cachePath: args['cache-path'],
         }).then((res) => info(`Download was finished successfully: ${res}`))
-          .catch(err => error(err)),
+            .catch(err => error(err)),
     )
     .command(
         'install',
@@ -50,7 +50,7 @@ yargs(hideBin(process.argv))
             overwriteExistingInstallation: args.overwrite,
             linkedPlugins: [args['link-plugin']],
         }).then((res) => info(`Installation was finished successfully: ${res}`))
-          .catch(err => error(err)),
+            .catch(err => error(err)),
     )
     .command(
         'launch',
@@ -58,7 +58,7 @@ yargs(hideBin(process.argv))
         (yargs) => yargs.option('path', { default: getConfig().getInstallationPath() }),
         args => launch({
             installationPath: args.path,
-        }).then(() => info("Camunda Modeler launched successfully"))
-          .catch(err => error(err)),
+        }).then(() => info('Camunda Modeler launched successfully'))
+            .catch(err => error(err)),
     )
     .argv;
