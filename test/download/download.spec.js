@@ -1,17 +1,12 @@
 const assert = require('node:assert');
-const { access, mkdtemp } = require('node:fs/promises');
-const { tmpdir } = require('node:os');
-const { sep } = require('node:path');
-const { beforeEach, describe, it } = require('node:test');
+const { access } = require('node:fs/promises');
+const { describe, it } = require('node:test');
 const { download } = require('../../lib');
 
 const withNetworkMocks = require('../util/withNetworkMocks');
+const withTemporaryDirectory = require('../util/withTemporaryDirectory');
 
-describe('Download', withNetworkMocks(function (fetchMock) {
-    let cacheDirectory;
-    beforeEach(async () => {
-        cacheDirectory = await mkdtemp(`${tmpdir()}${sep}`);
-    });
+describe('Download', withNetworkMocks((fetchMock) => withTemporaryDirectory(cacheDirectory => {
 
     it('should retrieve latest version', async function () {
         const downloadPath = await download({
@@ -54,4 +49,4 @@ describe('Download', withNetworkMocks(function (fetchMock) {
         await assert.doesNotReject(downloadWithoutCache().then(access));
         assert.equal(fetchMock().callCount(), 4);
     });
-}));
+})));
