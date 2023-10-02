@@ -1,18 +1,20 @@
-const { afterEach, beforeEach, mock } = require('node:test');
-const mockNetworkCalls = require('./mockNetworkCalls')
+const mockNetworkCalls = require('./mockNetworkCalls');
+const useContextHooks = require('./useContextHooks');
 
 function withNetworkMocks(testFunction) {
     return function (testContext) {
-        const contextBeforeEach = testContext && testContext.beforeEach ? testContext.beforeEach: beforeEach;
-        const contextAfterEach = testContext && testContext.afterEach ? testContext.afterEach : afterEach;
-        const contextMock = testContext && testContext.mock ? testContext.mock : mock;
-            
-        contextBeforeEach(() => {
-            mockNetworkCalls(testContext);
+        const { afterEach, beforeEach, mock } = useContextHooks(testContext);
+        
+        let fetchMock;
+        beforeEach(() => {
+            fetchMock = mockNetworkCalls(testContext);
         });
-        testFunction(testContext);
-        contextAfterEach(() => {
-            contextMock.reset();
+        // We inject the fetchMock as function,
+        // because the variable will be set later.
+        testFunction(() => fetchMock, testContext);
+        afterEach(() => {
+            mock.reset();
+            fetchMock = undefined;
         })
     }
 }
