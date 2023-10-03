@@ -11,7 +11,7 @@ function withNetworkMocks(testFunction) {
         });
         // We inject the fetchMock as function,
         // because the variable will be set later.
-        testFunction(() => fetchMock, testContext);
+        testFunction(testContext, () => fetchMock);
         afterEach(() => {
             mock.reset();
             fetchMock = undefined;
