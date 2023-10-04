@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="test-resources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/test-resources/7ce65606-b649-4adc-b298-72bfa2f78265_camunda-modeler-5.15.1-win-ia32.zip!/" />
+      <root url="jar://$PROJECT_DIR$/test-resources/0bebfb2f-42f1-4115-a3d1-f7c8a70e54f2_camunda-modeler-5.15.1-win-x64.zip!/" />
+      <root url="jar://$PROJECT_DIR$/test-resources/535dba54-8dac-42b5-a942-7919c54b18ee_camunda-modeler-5.15.1-mac.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
