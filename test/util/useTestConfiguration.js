@@ -11,9 +11,7 @@ function useTestConfiguration (testContext) {
     const directories = [];
 
     after(async () => {
-        // Cleanup is currently commented out because it only happens to clear the directory,
-        // but always fails to remove the empty directory and thus leads to failing test cases.
-        // await Promise.all(directories.map(dir => rm(dir, { recursive: true, force: true })));
+        await Promise.all(directories.map(dir => rm(dir, { recursive: true, force: true })));
         directories.length = 0;
     });
 
