@@ -6,12 +6,12 @@ const { download } = require('../../lib');
 const withNetworkMocks = require('../util/withNetworkMocks');
 const useDefaultTestConfiguration = require('../util/useTestConfiguration');
 
-describe('Download', withNetworkMocks((_, fetchMock) => {
-    it('should retrieve latest version', async function (ctx) {
+describe('Download', withNetworkMocks((ctx, fetchMock) => {
+    it('should retrieve latest version', async function () {
         await assert.doesNotReject(useDefaultTestConfiguration(ctx).then(download).then(access));
     });
 
-    it('should respect configured version', async function (ctx) {
+    it('should respect configured version', async function () {
         // Only the latest version is cached within our test resources,
         // so if it fails to retrieve it can not be the latest as per default.
         await assert.rejects(useDefaultTestConfiguration(ctx).then(config => config.withOverrides({
@@ -19,7 +19,7 @@ describe('Download', withNetworkMocks((_, fetchMock) => {
         })).then(download));
     });
 
-    it('should use cache', async function (ctx) {
+    it('should use cache', async function () {
         const configWithCache = useDefaultTestConfiguration(ctx);
 
         await assert.doesNotReject(configWithCache.then(download).then(access));
@@ -29,7 +29,7 @@ describe('Download', withNetworkMocks((_, fetchMock) => {
         assert.equal(fetchMock().callCount(), 3);
     });
 
-    it('should not use cache if disabled', async function (ctx) {
+    it('should not use cache if disabled', async function () {
         const configWithoutCache = useDefaultTestConfiguration(ctx).then(config => config.withOverrides({
             noCache: true,
         }));

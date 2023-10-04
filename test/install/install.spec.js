@@ -7,18 +7,18 @@ const { install } = require('../../lib');
 const withNetworkMocks = require('../util/withNetworkMocks');
 const useTestConfiguration = require('../util/useTestConfiguration');
 
-describe('Install', withNetworkMocks(() => {
-    it('should install latest version', async function (ctx) {
+describe('Install', withNetworkMocks((ctx) => {
+    it('should install latest version', async function () {
         await assert.doesNotReject(useTestConfiguration(ctx).then(install).then(access));
     });
 
-    it('should fail to install on existing installation', async function (ctx) {
+    it('should fail to install on existing installation', async function () {
         const config = await useTestConfiguration(ctx);
         await assert.doesNotReject(install(config).then(access));
         await assert.rejects(install(config));
     });
 
-    it('should overwrite existing installation', async function (ctx) {
+    it('should overwrite existing installation', async function () {
         const withOverrideConfig = useTestConfiguration(ctx).then(config => config.withOverrides({
             overwriteExistingInstallation: true,
         }));
@@ -27,7 +27,7 @@ describe('Install', withNetworkMocks(() => {
         await assert.doesNotReject(withOverrideConfig.then(install).then(access));
     });
 
-    it('should link plugin', async function (ctx) {
+    it('should link plugin', async function () {
         const withLinkedPluginConfig = await useTestConfiguration(ctx).then(config => config.withOverrides({
             linkedPlugins: [join('test', 'install', 'example_plugin')],
         }));
@@ -36,7 +36,7 @@ describe('Install', withNetworkMocks(() => {
         await assert.doesNotReject(access(join(withLinkedPluginConfig.getInstallationPath(), 'resources', 'plugins', 'example_plugin', 'index.js')));
     });
 
-    it('should link element template', async function (ctx) {
+    it('should link element template', async function () {
         const withLinkedTemplateConfig = await useTestConfiguration(ctx).then(config => config.withOverrides({
             linkedTemplates: [join('test', 'install', 'example_template.json')],
         }));
