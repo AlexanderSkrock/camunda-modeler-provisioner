@@ -6,15 +6,16 @@ const useContextHooks = require('./useContextHooks');
 const { Config } = require('../../lib/config');
 
 function useDefaultTestConfiguration (testContext) {
-    const { afterEach, beforeEach } = useContextHooks(testContext);
+    const { after, before } = useContextHooks(testContext);
 
     const config = new Config();
 
-    beforeEach(async () => {
+    before(async () => {
         config.cachePath = await mkdtemp(`${tmpdir()}${sep}`);
         config.installationPath = await mkdtemp(`${tmpdir()}${sep}`);
-    });
-    afterEach(async () => {
+    })
+
+    after(async () => {
         await rm(config.getCachePath(), { recursive: true, force: true });
         await rm(config.getInstallationPath(), { recursive: true, force: true });
     });

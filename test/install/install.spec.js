@@ -1,24 +1,26 @@
 const assert = require('node:assert');
+const { join } = require('node:path');
 const { access } = require('node:fs/promises');
 const { describe, it } = require('node:test');
-const { download, install } = require('../../lib');
+const { install } = require('../../lib');
 
 const withNetworkMocks = require('../util/withNetworkMocks');
 const useDefaultTestConfiguration = require('../util/useDefaultTestConfiguration');
 
-describe('Install', withNetworkMocks((ctx, fetchMock) => {
-    const config = useDefaultTestConfiguration(ctx, 1);
-
-    it('should install latest version', async function () {
+describe('Install', withNetworkMocks(() => {
+    it('should install latest version', async function (ctx) {
+        const config = useDefaultTestConfiguration(ctx);
         await assert.doesNotReject(install(config).then(access));
     });
 
-    it('should fail to install on existing installation', async function () {
+    it('should fail to install on existing installation', async function (ctx) {
+        const config = useDefaultTestConfiguration(ctx);
         await assert.doesNotReject(install(config).then(access));
         await assert.rejects(install(config));
     });
 
-    it('should overwrite existing installation', async function () {
+    it('should overwrite existing installation', async function (ctx) {
+        const config = useDefaultTestConfiguration(ctx);
         const installWithOverride = () => install(config.withOverrides({
             overwriteExistingInstallation: true,
         }));
@@ -27,8 +29,23 @@ describe('Install', withNetworkMocks((ctx, fetchMock) => {
         await assert.doesNotReject(installWithOverride().then(access));
     });
 
-    /*
-     * TODO
-     * Testcase for linking plugins and element templates
-     */
+    it('should link plugin', async function (ctx) {
+        const config = useDefaultTestConfiguration(ctx);
+        const installWithLinkedPlugin = () => install(config.withOverrides({
+            linkedPlugins: [ join('test', 'install', 'example_plugin') ],
+        }));
+
+        await assert.doesNotReject(installWithLinkedPlugin().then(access));
+        await assert.doesNotReject(access(join(config.getInstallationPath(), 'resources', 'plugins', 'example_plugin', 'index.js')));
+    });
+
+    it('should link element template', async function (ctx) {
+        const config = useDefaultTestConfiguration(ctx);
+        const installWithLinkedTemplate = () => install(config.withOverrides({
+            linkedTemplates: [ join('test', 'install', 'example_template.json') ],
+        }));
+
+        await assert.doesNotReject(installWithLinkedTemplate().then(access));
+        await assert.doesNotReject(access(join(config.getInstallationPath(), 'resources', 'element-templates', 'example_template.json')));
+    });
 }));
