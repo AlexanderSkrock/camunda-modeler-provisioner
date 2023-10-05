@@ -1,22 +1,13 @@
 const assert = require('node:assert');
 const { join } = require('node:path');
 const { access } = require('node:fs/promises');
-const { statSync } = require('node:fs');
 const { describe, it } = require('node:test');
 const { install } = require('../../lib');
 
 const withNetworkMocks = require('../util/withNetworkMocks');
 const useTestConfiguration = require('../util/useTestConfiguration');
-const { info } = require('../../lib/logging');
 
 describe('Install', withNetworkMocks((ctx) => {
-    it('should retrieve correct stats', function () {
-        info('Stats of the test resources: ' + JSON.stringify(statSync('test-resources')));
-        Object.entries(require('../../test-resources/response_mappings.json')).forEach(([url, response]) => {
-            info(`Stats of the body for "${url}": ${JSON.stringify(statSync(join('test-resources', response.body)))}`);
-        });
-    });
-
     it('should install latest version', async function () {
         await assert.doesNotReject(useTestConfiguration(ctx).then(install).then(access));
     });
