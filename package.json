@@ -30,7 +30,9 @@
   },
   "dependencies": {
     "cosmiconfig": "^8.3.6",
+    "file-type": "16.5.3",
     "node-stream-zip": "^1.15.0",
+    "tar": "^6.2.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
